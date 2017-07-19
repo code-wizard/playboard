@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'account',
     'main',
     'social_django',
@@ -92,8 +93,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': 'playboard',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'regalix',
+        'PASSWORD': 'regalix123',
         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'sql_mode':'STRICT_TRANS_TABLES',
@@ -147,7 +148,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "account.User"
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     # 'account.backends.EmailAuthBackend',
@@ -160,6 +161,7 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_USER_MODEL = 'account.User'
 
+
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
@@ -170,7 +172,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.get_username',
     'social_core.pipeline.user.create_user',
     'account.utils.save_profile_from_social',  # <--- set the path to the function
-
+    #
     'account.utils.associate_with_user',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',

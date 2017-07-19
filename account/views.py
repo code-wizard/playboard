@@ -3,13 +3,25 @@ from django.http import request
 from main.models import PbSubdomains
 from django.contrib.auth import login as django_login,authenticate,logout as django_logout
 from django.contrib.auth.decorators import login_required
-
+import subprocess
+from account.tasks import create_all_playform
+from account.models import User
 # Create your views here.
 
 
 def my_playforms(request):
-    if PbSubdomains.objects.filter(owner=request.user.id).exists():
-        return redirect("create-sub-domain")
+    if not PbSubdomains.objects.filter(owner=request.user.id).exists():
+        try:
+            try:
+                user = User.objects.get(pk=request.user.id)
+                username = user.username.replace(".", "")
+                subprocess.check_call(["", username])
+            except subprocess.CalledProcessError:
+                pass
+        except subprocess.CalledProcessError:
+            pass
+
+
     else:
         context={}
         return render(request,"account/my_platforms.html",context)

@@ -3,7 +3,7 @@ from account.models import PbProfile,PbUserOauthToken
 
 
 def save_profile_from_social(backend,user,response,*args,**kwargs):
-    print(kwargs,response,backend.name)
+    print(user)
     if kwargs['is_new']:
         attrs = {'user': user}
 

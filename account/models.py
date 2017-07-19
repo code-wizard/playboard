@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import  AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import  AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import  timezone
 from django.db import IntegrityError
@@ -54,10 +54,12 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD = "email"
     email = models.EmailField(_('email address'), max_length=254, unique=True, db_index=True)
     username = models.CharField(_('username'), max_length=500, blank=True)
+
+    is_superuser = models.BooleanField(default=False)
 
     is_staff = models.BooleanField(_('staff status'), default=False,
                                    help_text=_('Designates whether the user can log into this admin '
@@ -104,6 +106,7 @@ class PbProfile(models.Model):
     gender = models.CharField(max_length=10, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    unique_
     avatar = models.ImageField(blank=True, default="default_avatar.jpg", upload_to=photo_upload_path)
 
     class Meta:
