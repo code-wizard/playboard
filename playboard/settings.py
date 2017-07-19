@@ -182,3 +182,10 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '271004915235-p7mp586cghh0h24v4stk773en6ei8esf.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xMN0hkLFjWszsf_XGiTd4mCK'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = "static" #os.path.join(BASE_DIR,"static/")
+
+MEDIA_ROOT =os.path.join(BASE_DIR,"media/")
+MEDIA_URL ='/media/'

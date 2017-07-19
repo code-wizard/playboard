@@ -106,7 +106,6 @@ class PbProfile(models.Model):
     gender = models.CharField(max_length=10, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    unique_
     avatar = models.ImageField(blank=True, default="default_avatar.jpg", upload_to=photo_upload_path)
 
     class Meta:
