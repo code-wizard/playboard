@@ -185,7 +185,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "static" #os.path.join(BASE_DIR,"static/")
+STATIC_ROOT = os.path.join(BASE_DIR,"static/")
 
-MEDIA_ROOT =os.path.join(BASE_DIR,"media/")
-MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,"media/")
+MEDIA_URL = "/media/"
