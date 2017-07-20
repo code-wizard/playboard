@@ -8,11 +8,11 @@
             <div class="col-md-6 col-md-offset-3 text-center">
               <h2 class="newsletter__title">My Platforms</h2>
                 <ul class="list-group">
-                    {% for p in platforms %}
+                    { for p in platforms %}
                   <li class="list-group-item">{% p.name %}</li>
-                    {% empty %}
+                    { empty %}
                         <p>You have not created any platform</p>
-                    {% endfor %}
+                    { endfor %}
                 </ul>
                 {{ e.output }}
 
