@@ -16,8 +16,8 @@ def my_playforms(request):
             username = user.username.replace(".", "")
             subprocess.check_call(["sudo","/home/ebuka/test.sh", username+".playboard.xyz",username])
             return render(request,"account/create_sub_domain.html")
-        except subprocess.CalledProcessError:
-            pass
+        except subprocess.CalledProcessError as e:
+            return render(request, "account/my_platforms.html", {"e":e})
 
 
     else:
