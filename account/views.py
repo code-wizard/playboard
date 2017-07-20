@@ -11,13 +11,13 @@ from account.models import User
 
 def my_playforms(request):
     if not PbSubdomains.objects.filter(owner=request.user.id).exists():
-        try:
+        # try:
             user = User.objects.get(pk=request.user.id)
             username = user.username.replace(".", "")
             subprocess.check_call(["/home/ebuka/all_platform.sh", username])
             return render(request,"account/create_sub_domain.html")
-        except subprocess.CalledProcessError:
-            pass
+        # except subprocess.CalledProcessError:
+        #     pass
 
 
     else:
