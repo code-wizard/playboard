@@ -9,7 +9,7 @@
               <h2 class="newsletter__title">My Platforms</h2>
                 <ul class="list-group">
                     { for p in platforms %}
-                  <li class="list-group-item">{% p.name %}</li>
+                  <li class="list-group-item">{{ p.name }}</li>
                     { empty %}
                         <p>You have not created any platform</p>
                     { endfor %}
