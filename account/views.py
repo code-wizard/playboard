@@ -15,7 +15,7 @@ def my_playforms(request):
             user = User.objects.get(pk=request.user.id)
             username = user.username.replace(".", "")
             # subprocess.check_call(["sudo","su", "ebuka" ,"-c","/home/ebuka/test.sh", username+".playboard.xyz",username])
-            subprocess.check_call(["sudo","-u","www-data","/home/ebuka/test.sh", username+".playboard.xyz",username])
+            subprocess.check_call(["sudo","-u","ebuka","/home/ebuka/test.sh", username+".playboard.xyz",username])
             return render(request,"account/create_sub_domain.html")
         except subprocess.CalledProcessError as e:
             print(e.output)
