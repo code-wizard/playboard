@@ -15,21 +15,11 @@ def my_playforms(request):
         try:
             user = User.objects.get(pk=request.user.id)
             username = user.username.replace(".", "")
-            # p = subprocess.Popen(["sudo", "-S", "whoami"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-            # p.communicate("alexander1990\n")[1]
-            # subprocess.check_call(["sudo","su", "ebuka" ,"-c","/home/ebuka/test.sh", username+".playboard.xyz",username])
-            # subprocess.check_call(["sudo","-u","root","/home/ebuka/test.sh", username+".playboard.xyz",username])
-            # p = subprocess.Popen(['sudo', '-S',"/home/ebuka/test.sh", username+".playboard.xyz",username],
-            #                      stdin=subprocess.PIPE, stderr=subprocess.PIPE,universal_newlines=True)
-            # err = p.communicate("alexander" + '\n')[1]
-            # print(err)
-            os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
-            # os.popen("sudo -S -u root %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username), 'w').write('regalix123\n')
-
+            subprocess.check_call(["sudo","/home/ebuka/magento.sh", username+".playboard.xyz",username])
+            # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
             return render(request,"account/create_sub_domain.html")
         except subprocess.CalledProcessError as e:
-            print(e.output)
-            # return render(request, "account/my_platforms.html", {"e":e})
+            return render(request, "account/error.html")
 
 
     else:
