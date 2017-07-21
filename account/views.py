@@ -15,7 +15,7 @@ def my_playforms(request):
         try:
             user = User.objects.get(pk=request.user.id)
             username = user.username.replace(".", "")
-            subprocess.check_call(["sudo","/home/ebuka/magento.sh", username+".playboard.xyz",username])
+            subprocess.check_call(["sudo","/home/ebuka/magento2.sh", username+".playboard.xyz",username])
             # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
             return render(request,"account/create_sub_domain.html")
         except subprocess.CalledProcessError as e:
