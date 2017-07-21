@@ -23,7 +23,7 @@ def my_playforms(request):
             #                      stdin=subprocess.PIPE, stderr=subprocess.PIPE,universal_newlines=True)
             # err = p.communicate("alexander" + '\n')[1]
             # print(err)
-            os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username), 'w')
+            os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
             # os.popen("sudo -S -u root %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username), 'w').write('regalix123\n')
 
             return render(request,"account/create_sub_domain.html")
