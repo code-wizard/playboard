@@ -16,7 +16,7 @@ def my_playforms(request):
             user = User.objects.get(pk=request.user.id)
             username = user.username.replace(".", "")
             p = subprocess.Popen(["sudo", "-S", "whoami"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-            print(p.communicate("alexander1990\n"))
+            p.communicate("alexander1990\n")
             # subprocess.check_call(["sudo","su", "ebuka" ,"-c","/home/ebuka/test.sh", username+".playboard.xyz",username])
             # subprocess.check_call(["sudo","-u","root","/home/ebuka/test.sh", username+".playboard.xyz",username])
             # p = subprocess.Popen(['sudo', '-S',"/home/ebuka/test.sh", username+".playboard.xyz",username],
