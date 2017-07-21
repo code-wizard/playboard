@@ -17,11 +17,11 @@ def my_playforms(request):
             username = user.username.replace(".", "")
             # subprocess.check_call(["sudo","su", "ebuka" ,"-c","/home/ebuka/test.sh", username+".playboard.xyz",username])
             # subprocess.check_call(["sudo","/home/ebuka/test.sh", username+".playboard.xyz",username])
-            p = subprocess.Popen(['sudo', '-S',"/home/ebuka/test.sh", username+".playboard.xyz",username],
-                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,universal_newlines=True)
-            err = p.communicate("alexander" + '\n')[1]
-            print(err)
-            # os.popen("sudo -S %s" % ("/home/ebuka/test.sh "+username+".playboard.xyz"+" "+username), 'w').write('alexander\n')
+            # p = subprocess.Popen(['sudo', '-S',"/home/ebuka/test.sh", username+".playboard.xyz",username],
+            #                      stdin=subprocess.PIPE, stderr=subprocess.PIPE,universal_newlines=True)
+            # err = p.communicate("alexander" + '\n')[1]
+            # print(err)
+            os.popen("sudo -S %s" % ("/home/ebuka/test.sh "+username+".playboard.xyz"+" "+username), 'w').write('alexander\n')
 
             return render(request,"account/create_sub_domain.html")
         except subprocess.CalledProcessError as e:
