@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 import subprocess
 from account.tasks import create_all_playform
 from account.models import User
+import os
 # Create your views here.
 
 
@@ -18,7 +19,10 @@ def my_playforms(request):
             # subprocess.check_call(["sudo","/home/ebuka/test.sh", username+".playboard.xyz",username])
             p = subprocess.Popen(['sudo', '-S',"/home/ebuka/test.sh", username+".playboard.xyz",username],
                                  stdin=subprocess.PIPE, stderr=subprocess.PIPE,universal_newlines=True)
-            p.communicate("alexander" + '\n')[1]
+            out,err= p.communicate("alexander" + '\n')[1]
+            print(out,err)
+            os.popen("sudo -S %s" % ("/home/ebuka/test.s", username+".playboard.xyz"+" "+username), 'w').write('alexander\n')
+
             return render(request,"account/create_sub_domain.html")
         except subprocess.CalledProcessError as e:
             print(e.output)
