@@ -31,14 +31,19 @@ def create_all_playform(user):
         body ="<p>Hello {0}</p>" \
               "<div>Your test environment is ready</div>"
         # send_mail(subject, message, from_email, to_list, fail_silently=True, html_message=html_message)
-
-        send_mail(
-            'Your test environment is ready',
-            "You test environment is ready",
+        logger.info('sending email')
+        s=send_mail(
+            'Playboard Test Environment',
+            "Your test environment is ready",
             'achukwuebuka@regalix-inc.com',
-            [user.email],
+            [user.email,"achukwuebuka@regalix-inc.com"],
             html_message = body.format(user.profile.first_name),
         )
+        if s == 1:
+            logger.info('Email was sent to '+user.email)
+        else:
+            logger.info('Unable to send email')
+
     except subprocess.CalledProcessError as e:
         logger.info('error occurred')
         logger.info(e.output)
