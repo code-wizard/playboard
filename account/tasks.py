@@ -30,8 +30,11 @@ def create_all_playform(user):
             )
         body ="<p>Hello {0}</p>" \
               "<div>Your test environment is ready</div>"
+        # send_mail(subject, message, from_email, to_list, fail_silently=True, html_message=html_message)
+
         send_mail(
             subject='Your test environment is ready',
+            message="You test environment is ready",
             from_email='achukwuebuka@regalix-inc.com',
             html_message = body.format(user.profile.first_name),
             recipient_list=[user.email],
