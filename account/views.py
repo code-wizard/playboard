@@ -11,16 +11,15 @@ import os
 
 
 def my_playforms(request):
-    if not PbSubdomains.objects.filter(owner=request.user.id).exists():
-        try:
-            user = User.objects.get(pk=request.user.id)
-            username = user.username.replace(".", "")
-            subprocess.check_call(["sudo","/home/ebuka/magento2.sh", username+".playboard.xyz",username])
-            # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
-            return render(request,"account/create_sub_domain.html")
-        except subprocess.CalledProcessError as e:
-            return render(request, "account/error.html")
 
+    if not PbSubdomains.objects.filter(owner=request.user.id).exists():
+        ''''
+            This only execute once for each user
+        '''
+        user = User.objects.get(pk=request.user.id)
+        username = user.username.replace(".", "")
+        create_all_playform.delay(username)
+        return render(request,"account/create_sub_domain.html")
 
     else:
         context={}

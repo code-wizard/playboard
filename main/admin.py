@@ -8,7 +8,7 @@ class AvailablePlatforms(admin.ModelAdmin):
 
 
 class Subdomains(admin.ModelAdmin):
-    list_display = ("name","owner","date_created")
+    list_display = ("name","owner","link","date_created")
 
 
 admin.site.register(PbAvailablePlaforms,AvailablePlatforms)
