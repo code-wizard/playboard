@@ -24,7 +24,7 @@ def create_all_playform(user):
             PbSubdomains.objects.create(
                 owner=user,
                 name=p.name,
-                link="{0}-{1}.playboard.xyz".format(user,p.name)
+                link="{0}-{1}.playboard.xyz".format(username,p.name)
             )
     except subprocess.CalledProcessError as e:
         logger.info('error occurred')
