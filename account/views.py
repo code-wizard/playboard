@@ -22,7 +22,10 @@ def my_playforms(request):
         return render(request,"account/create_sub_domain.html")
 
     else:
-        context={}
+        subdomains = PbSubdomains.objects.filter(owner=request.user.id)
+        context={
+            "subdomain":subdomains
+        }
         return render(request,"account/my_platforms.html",context)
 
 
