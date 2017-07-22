@@ -193,5 +193,18 @@ MEDIA_URL = "/media/"
 CELERY_ACCEPT_CONTENT=[ 'json', 'msgpack', 'yaml']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERYD_OPTS="--time-limit=7200 -E --loglevel=DEBUG"
+
 BROKER_URL = 'amqp://regalix:regalix123@localhost:5672//'
 CELERY_RESULT_BACKEND = 'amqp://regalix:regalix123@localhost:5672//'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'achukwuebuka@regalix-inc.com'
+
+EMAIL_HOST_PASSWORD = 'monalisa1226'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True

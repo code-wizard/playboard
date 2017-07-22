@@ -4,6 +4,8 @@ import subprocess
 from main.models import PbAvailablePlaforms,PbSubdomains
 from account.models import User
 from celery.utils.log import get_task_logger
+from django.core.mail import send_mail
+
 
 
 logger = get_task_logger(__name__)
@@ -26,6 +28,14 @@ def create_all_playform(user):
                 name=p.name,
                 link="{0}-{1}.playboard.xyz".format(username,p.name)
             )
+        body ="<p>Hello {0}</p>" \
+              "<div>Your test environment is ready</div>"
+        send_mail(
+            'Your test environment is ready',
+            'achukwuebuka@regalix-inc.com',
+            html_message = body.format(user.profile.first_name)
+            [user.email],
+        )
     except subprocess.CalledProcessError as e:
         logger.info('error occurred')
         logger.info(e.output)
