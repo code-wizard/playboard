@@ -17,8 +17,8 @@ def my_playforms(request):
             This only execute once for each user
         '''
         user = User.objects.get(pk=request.user.id)
-        username = user.username.replace(".", "")
-        create_all_playform.delay(username)
+        # username = user.username.replace(".", "")
+        create_all_playform.delay(user.id)
         return render(request,"account/create_sub_domain.html")
 
     else:
