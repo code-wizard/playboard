@@ -3,14 +3,22 @@ from celery import shared_task
 import subprocess
 from main.models import PbAvailablePlaforms,PbSubdomains
 from account.models import User
+from celery.utils.log import get_task_logger
+
+
+logger = get_task_logger(__name__)
 
 
 @shared_task
 def create_all_playform(user):
     try:
+        logger.info('Getting user detail')
         user = User.objects.get(pk=user)
+        logger.info('Removing dots')
         username = user.username.replace(".","")
+        logger.info('Executing script')
         subprocess.check_call(["sudo", "/home/ebuka/all_platform.sh", username])
+        logger.info('Updating subdomains')
         # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
         for p in PbAvailablePlaforms.objects.all():
             PbSubdomains.object.create(
@@ -19,7 +27,10 @@ def create_all_playform(user):
                 link="{0]-{1}.playboard.xyz".format(user,p.name)
             )
     except subprocess.CalledProcessError as e:
-        print(e.output)
+        logger.info('error occurred')
+        logger.info(e.output)
+
+    logger.info('Returning')
 
 
 @shared_task
