@@ -189,3 +189,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,"static/")
 
 MEDIA_ROOT = os.path.join(BASE_DIR,"media/")
 MEDIA_URL = "/media/"
+
+CELERY_ACCEPT_CONTENT=[ 'json', 'msgpack', 'yaml']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
