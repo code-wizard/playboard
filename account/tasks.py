@@ -16,7 +16,7 @@ def create_all_playform(user):
         user = User.objects.get(pk=user)
         logger.info('Removing dots')
         username = user.username.replace(".","")
-        logger.info('Executing script for -'+username)
+        logger.info('Executing script for - '+username)
         subprocess.check_call(["sudo", "/home/ebuka/all_platform.sh", username])
         logger.info('Updating subdomains')
         # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
@@ -24,7 +24,7 @@ def create_all_playform(user):
             PbSubdomains.objects.create(
                 owner=user,
                 name=p.name,
-                link="{0]-{1}.playboard.xyz".format(user,p.name)
+                link="{0}-{1}.playboard.xyz".format(user,p.name)
             )
     except subprocess.CalledProcessError as e:
         logger.info('error occurred')
