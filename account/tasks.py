@@ -33,8 +33,8 @@ def create_all_playform(user):
         send_mail(
             'Your test environment is ready',
             'achukwuebuka@regalix-inc.com',
-            html_message = body.format(user.profile.first_name)
-            [user.email],
+            html_message = body.format(user.profile.first_name),
+            to=[user.email],
         )
     except subprocess.CalledProcessError as e:
         logger.info('error occurred')
