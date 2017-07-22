@@ -9,7 +9,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'playboard.settings')
 
 from django.conf import settings  # noqa
 
-app = Celery('playboard')
+app = Celery('playboard',broker=settings.BROKER_URL)
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
