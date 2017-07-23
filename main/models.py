@@ -22,3 +22,12 @@ class PbSubdomains(models.Model):
     class Meta:
         db_table = "pb_subdomains"
 
+
+class PbConfig(models.Model):
+    user = models.ForeignKey("account.user",related_name="user_config",on_delete=models.CASCADE)
+    is_creating = models.BooleanField(default=False)
+
+
+    class Meta:
+        db_table = "pb_config"
+

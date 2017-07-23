@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import request
-from main.models import PbSubdomains
+from main.models import PbSubdomains,PbConfig
 from django.contrib.auth import login as django_login,authenticate,logout as django_logout
 from django.contrib.auth.decorators import login_required
 import subprocess
@@ -16,10 +16,12 @@ def my_playforms(request):
         ''''
             This only execute once for each user
         '''
-        user = User.objects.get(pk=request.user.id)
-        # username = user.username.replace(".", "")
-        create_all_playform.delay(user.id)
-        return render(request,"account/create_sub_domain.html")
+        if not PbConfig.objects.filter(user=request.user.id,is_creating=True).exists():
+            user = User.objects.get(pk=request.user.id)
+            # username = user.username.replace(".", "")
+            create_all_playform.delay(user.id)
+            return render(request,"account/create_sub_domain.html")
+        return render(request,"account")
 
     else:
         subdomains = PbSubdomains.objects.filter(owner=request.user.id)

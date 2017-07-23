@@ -1,10 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 import subprocess
-from main.models import PbAvailablePlaforms,PbSubdomains
+from main.models import PbAvailablePlaforms,PbSubdomains,PbConfig
 from account.models import User
 from celery.utils.log import get_task_logger
 from django.core.mail import send_mail
+
 
 
 
@@ -14,6 +15,16 @@ logger = get_task_logger(__name__)
 @shared_task
 def create_all_playform(user):
     try:
+        if PbConfig.objects.filter(user=user).exists():
+            config = PbConfig.objects.get(user=user)
+            config.is_creating=True
+            config.save()
+        else:
+            PbConfig.objects.create(
+                user=User.objects.get(pk=user),
+                is_creating=True
+            )
+
         logger.info('Getting user detail')
         user = User.objects.get(pk=user)
         logger.info('Removing dots')
