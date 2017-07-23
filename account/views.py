@@ -20,8 +20,7 @@ def my_playforms(request):
             user = User.objects.get(pk=request.user.id)
             # username = user.username.replace(".", "")
             create_all_playform.delay(user.id)
-            return render(request,"account/create_sub_domain.html")
-        return render(request,"account")
+        return render(request,"account/create_sub_domain.html")
 
     else:
         subdomains = PbSubdomains.objects.filter(owner=request.user.id)
