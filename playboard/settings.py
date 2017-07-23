@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$nfj2ucn3j!-f5yr3xbxdu9sou$xl_5i=_)-qz!6ei+&hx3nob'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['playboard.xyz','127.0.0.1','localhost']
 
