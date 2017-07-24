@@ -51,6 +51,8 @@ def create_all_playform(user):
             html_message = body.format(user.profile.first_name),
         )
         if s == 1:
+            config.is_creating = False
+            config.save()
             logger.info('Email was sent to '+user.email)
         else:
             logger.info('Unable to send email')
