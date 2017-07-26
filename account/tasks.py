@@ -30,15 +30,16 @@ def create_all_playform(user):
         logger.info('Removing dots')
         username = user.username.replace(".","")
         logger.info('Executing script for - '+username)
-        subprocess.check_call(["sudo", "/home/ebuka/all_platform.sh", username])
-        logger.info('Updating subdomains')
-        # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
         for p in PbAvailablePlaforms.objects.all():
             PbSubdomains.objects.create(
                 owner=user,
                 name=p.name,
                 link="{0}-{1}.playboard.xyz".format(username,p.name)
-            )
+        )
+        subprocess.check_call(["sudo", "/home/ebuka/all_platform.sh", username])
+        logger.info('Updating subdomains')
+        # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
+        
         body ="<p>Hello {0}</p>" \
               "<div>Your test environment is ready</div>"
         # send_mail(subject, message, from_email, to_list, fail_silently=True, html_message=html_message)
