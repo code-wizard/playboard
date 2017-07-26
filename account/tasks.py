@@ -55,6 +55,8 @@ def create_all_playform(user):
             config.save()
             logger.info('Email was sent to '+user.email)
         else:
+            config.is_creating = False
+            config.save()
             logger.info('Unable to send email')
 
     except subprocess.CalledProcessError as e:
