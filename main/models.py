@@ -13,7 +13,7 @@ class PbAvailablePlaforms(models.Model):
 
 
 class PbSubdomains(models.Model):
-    name = models.CharField(max_length=20,unique=True)
+    name = models.CharField(max_length=20)
     owner = models.ForeignKey("account.user",related_name="sub_domains", on_delete=models.CASCADE)
     link = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
