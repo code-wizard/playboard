@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account',
     'main',
     'social_django',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
