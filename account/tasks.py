@@ -34,6 +34,7 @@ def create_all_playform(user):
                 name=p.name,
                 link="{0}-{1}.playboard.xyz".format(username, p.name)
             )
+        print("Printing username", username)
         subprocess.check_call(["sudo", "/home/ebuka/playboard-setup/all_platform.sh", username])
         logger.info('Updating subdomains')
         # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
@@ -70,7 +71,7 @@ def create_wordpress(user):
     try:
         user = User.objects.get(pk=user)
         username = user.username.replace(".","")
-        subprocess.check_call(["sudo", "/home/ebuka/wordpress.sh", username+"-wordpress",username])
+        subprocess.check_call(["sudo", "/home/ebuka/playboard-setup/wordpress.sh", username+"-wordpress",username])
     except subprocess.CalledProcessError:
         pass
 
