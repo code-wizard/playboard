@@ -18,7 +18,7 @@ def create_all_playform(user):
             config.is_creating=True
             config.save()
         else:
-            PbConfig.objects.create(
+            config = PbConfig.objects.create(
                 user=User.objects.get(pk=user),
                 is_creating=True
             )
