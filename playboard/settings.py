@@ -95,7 +95,7 @@ DATABASES = {
         # 'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': config("DB_NAME"),
         'USER': config("DB_USER"),
-        'PASSWORD': '',
+        'PASSWORD': config("DB_PASSWORD"),
         'HOST': config("DB_HOST"),   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'sql_mode':'STRICT_TRANS_TABLES',
