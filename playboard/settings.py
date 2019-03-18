@@ -191,17 +191,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
 
-CELERY_ACCEPT_CONTENT=[ 'json', 'msgpack', 'yaml']
+CELERY_ACCEPT_CONTENT = [ 'json', 'msgpack', 'yaml']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERYD_OPTS="--time-limit=7200 -E --loglevel=DEBUG"
+CELERYD_OPTS = "--time-limit=7200 -E --loglevel=DEBUG"
 
 #BROKER_URL = 'amqp://regalix:regalix123@localhost:5672//'
 #CELERY_RESULT_BACKEND = 'amqp://regalix:regalix123@localhost:5672//'
 
-BROKER_URL = 'amqp://guest:guest@localhost:5672//'
-CELERY_RESULT_BACKEND = 'amqp://guest:guest@localhost:5672//'
-#CELERY_RESULT_BACKEND = 'django-db'
+BROKER_URL = config("BROKER_URL")
+CELERY_RESULT_BACKEND = config("CELERY_RESULT_BACKEND")
+# CELERY_RESULT_BACKEND = 'django-db'
 
 EMAIL_HOST = 'smtp.gmail.com'
 
