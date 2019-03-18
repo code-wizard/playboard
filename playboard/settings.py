@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$nfj2ucn3j!-f5yr3xbxdu9sou$xl_5i=_)-qz!6ei+&hx3nob'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['playboard.xyz','127.0.0.1','localhost']
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
     'account',
     'main',
     'social_django',
@@ -93,8 +92,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': 'playboard',
-        'USER': 'regalix',
-        'PASSWORD': 'regalix123',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'sql_mode':'STRICT_TRANS_TABLES',
@@ -152,6 +151,7 @@ AUTH_USER_MODEL = "account.User"
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     # 'account.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/account/my-platforms'
@@ -179,15 +179,14 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '271004915235-p7mp586cghh0h24v4stk773en6ei8esf.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xMN0hkLFjWszsf_XGiTd4mCK'
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '271004915235-p7mp586cghh0h24v4stk773en6ei8esf.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '40375820265-sih36doagbmlerp6v675g9corockbnnd.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xMN0hkLFjWszsf_XGiTd4mCK'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ia2ZlmVcj-k0nu5R7oi9N32L'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,"static/")
-
-MEDIA_ROOT = os.path.join(BASE_DIR,"media/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
 
 CELERY_ACCEPT_CONTENT=[ 'json', 'msgpack', 'yaml']
@@ -195,9 +194,12 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERYD_OPTS="--time-limit=7200 -E --loglevel=DEBUG"
 
-BROKER_URL = 'amqp://regalix:regalix123@localhost:5672//'
-CELERY_RESULT_BACKEND = 'amqp://regalix:regalix123@localhost:5672//'
+#BROKER_URL = 'amqp://regalix:regalix123@localhost:5672//'
+#CELERY_RESULT_BACKEND = 'amqp://regalix:regalix123@localhost:5672//'
 
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_RESULT_BACKEND = 'amqp://guest:guest@localhost:5672//'
+#CELERY_RESULT_BACKEND = 'django-db'
 
 EMAIL_HOST = 'smtp.gmail.com'
 

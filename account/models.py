@@ -112,3 +112,11 @@ class PbProfile(models.Model):
         # managed = False
         db_table = 'pb_profile'
 
+
+class PbOngoingCreationTask(models.Model):
+    task = models.CharField(max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="running_platform_task")
+
+    class Meta:
+        # managed = Fals
+        db_table = 'pb_ongoing_task'

@@ -7,8 +7,6 @@ from celery.utils.log import get_task_logger
 from django.core.mail import send_mail
 
 
-
-
 logger = get_task_logger(__name__)
 
 
@@ -28,14 +26,14 @@ def create_all_playform(user):
         logger.info('Getting user detail')
         user = User.objects.get(pk=user)
         logger.info('Removing dots')
-        username = user.username.replace(".","")
+        username = user.username.replace(".", "")
         logger.info('Executing script for - '+username)
         for p in PbAvailablePlaforms.objects.all():
             PbSubdomains.objects.create(
                 owner=user,
                 name=p.name,
-                link="{0}-{1}.playboard.xyz".format(username,p.name)
-        )
+                link="{0}-{1}.playboard.xyz".format(username, p.name)
+            )
         subprocess.check_call(["sudo", "/home/ebuka/all_platform.sh", username])
         logger.info('Updating subdomains')
         # os.popen("sudo  %s" % ("/home/ebuka/wordpress.sh "+username+".playboard.xyz"+" "+username))
@@ -71,7 +69,6 @@ def create_all_playform(user):
 def create_wordpress(user):
     try:
         user = User.objects.get(pk=user)
-
         username = user.username.replace(".","")
         subprocess.check_call(["sudo", "/home/ebuka/wordpress.sh", username+"-wordpress",username])
     except subprocess.CalledProcessError:
