@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from decouple import config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -23,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$nfj2ucn3j!-f5yr3xbxdu9sou$xl_5i=_)-qz!6ei+&hx3nob'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = ['playboard.xyz','127.0.0.1','localhost']
+ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -91,10 +93,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # 'ENGINE': 'django.contrib.gis.db.backends.mysql',
-        'NAME': 'playboard',
-        'USER': 'root',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
         'PASSWORD': '',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'HOST': config("DB_HOST"),   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'sql_mode':'STRICT_TRANS_TABLES',
         'OPTIONS': {
