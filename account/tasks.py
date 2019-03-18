@@ -25,8 +25,9 @@ def create_all_playform(user):
 
         logger.info('Getting user detail')
         user = User.objects.get(pk=user)
+        username = user.email.split('@')[0].rstrip('>')
         logger.info('Removing dots')
-        username = user.username.replace(".", "")
+        username = username.replace(".", "")
         logger.info('Executing script for - '+username)
         for p in PbAvailablePlaforms.objects.all():
             PbSubdomains.objects.create(
