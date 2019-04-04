@@ -6,3 +6,8 @@ from account import models
 @admin.register(models.PbOngoingCreationTask)
 class IbRunningTaskAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.User)
+class PbUsersAdmin(admin.ModelAdmin):
+    pass

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
+<style>
+    .list-group-item {
+        list-style: none;
+    }
+</style>
     <section class="section-wrap bottom-divider" >
         <div class="container">
           <div class="row">
@@ -10,9 +14,34 @@
                 <ul class="list-group">
                     {% for p in subdomain %}
                   <li class="list-group-item">
-                      <a target="_blank" href="http://{{ p.link }}">
-                          {{ p.name }}
-                      </a>
+                     <div class="row">
+                         <div class="col-md-8">
+                            {% if p.link %}
+                             <a target="_blank" href="http://{{ p.link }}">{{ p.name }}</a>
+                             {% else %}
+                             {{ p.name }}
+                             {% endif %}
+                         </div>
+                         <div class="col-md-4">
+                             {% if p.platform.installation_link  %}
+                                {% if not p.link%}
+                                    <a target="_blank" href="{{p.platform.installation_link}}">Install Now</a>
+                                {% else %}
+                                    <a target="_blank" href="{{p.link}}">Visit Site</a>
+                                {% endif %}
+
+                             {% else %}
+                                {% if not p.link %}
+                             <a target="_blank" href="javascript:void(0)" onclick="openModal('{{p.link}}', '{{p.platform.id}}')"
+                                data-toggle="modal" data-target="#myModal">Enter link</a></div>
+                                {% else %}
+                                    <a target="_blank" href="{{p.link}}">Visit Site</a>
+
+                                {% endif %}
+
+                             {% endif %}
+
+                     </div>
                   </li>
                     {% empty %}
                         <p>You have not created any platform</p>
@@ -25,4 +54,40 @@
         </div>
       </section>
 
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Enter Website Link</h4>
+      </div>
+        <form method="post" action="{% url 'account:save-link' %}">
+            {{cs}}
+      <div class="modal-body">
+                 {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="link" name="link" class="form-control" placeholder="Enter website link">
+                <input type="hidden" id="platform" name="platform">
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn--color ">Save</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+    function openModal(link, platform) {
+//        $(".enter-link").on("click", function () {
+            $("#platform").val(platform)
+            $("#link").val(link)
+//        })
+    }
+</script>
 {% endblock %}

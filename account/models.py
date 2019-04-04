@@ -6,8 +6,6 @@ from django.db import IntegrityError
 # Create your models here.
 
 
-
-
 class UserManager(BaseUserManager):
 
     def _create_user(self, email, password,
@@ -26,7 +24,6 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
 
     def create_user(self, email, password=None,username="default", **kwargs):
         try:
